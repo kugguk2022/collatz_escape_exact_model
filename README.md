@@ -4,7 +4,6 @@ This repo is a **reproducible atlas** for a specific class of *symbolically forc
 a tetration / exponential-iteration core that is **forced by a Collatz-like branch rule**, and exhibits a **direction-dependent stability transition**:
 one direction stays in a bounded attracting region while the opposite direction develops **escape / hyper-growth** beyond a critical coupling.
 
-> Status: **template repo**. Plug in your exact update rule in `src/collatzscape/maps.py` and re-run the sweep.
 
 ## What this *is* (official vocabulary)
 
