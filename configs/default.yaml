@@ -1,0 +1,24 @@
+# Default config (cosine-Collatz gate + phase kick). Keep small to avoid heavy runs.
+seed: 0
+
+grid:
+  re_min: -2.0
+  re_max:  2.0
+  im_min: -2.0
+  im_max:  2.0
+  n_re: 220
+  n_im: 220
+
+model:
+  c: [1.8725, 0.0]
+  alpha: 0.05
+  gamma: 0.15
+  steps: 120
+  direction: +1
+  kick_mode: tanh
+  C_mode: cosine
+  paired: true
+
+sweep:
+  gammas: [0.0, 0.05, 0.10, 0.15, 0.30, 0.50]
+  directions: [+1, -1]

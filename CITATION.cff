@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it."
+title: "Collatzscape: A forced tetration with direction-dependent collapse"
+version: 0.1.0
+date-released: "2026-02-26"
+license: MIT
+authors:
+  - family-names: "Farkas"
+    given-names: "Zolton"
+repository-code: "https://github.com/EncapsulatorP/collatzscape"
+keywords:
+  - complex dynamics
+  - non-autonomous iteration
+  - tetration
+  - Collatz
+  - symbolic dynamics
+  - dynamic rays
