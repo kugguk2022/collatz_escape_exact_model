@@ -1,4 +1,4 @@
-# Collatzscape: non-autonomous tetration with direction-dependent collapse
+# Collatzscape: Forcefull tetration with direction-dependent collapse
 
 This repo is a **reproducible atlas** for a specific class of *symbolically forced transcendental dynamics*:
 a tetration / exponential-iteration core that is **forced by a Collatz-like branch rule**, and exhibits a **direction-dependent stability transition**:
