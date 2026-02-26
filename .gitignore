@@ -54,7 +54,6 @@ credentials/
 logs/
 
 # Artifacts / generated outputs
-figures/
 artifacts/
 outputs/
 tmp/
