@@ -1,42 +1,83 @@
-# Theory notes (paper-grade, repo-first)
+# Theory: Mechanism and Stability
 
-## 1. Object of study
+## 1. Dynamical Form
 
-We study **forward compositions** of maps in a parameterized family, driven by a symbolic itinerary.
-This is the standard “non-autonomous holomorphic dynamics / skew-product” viewpoint:
+The implemented map is a paired, forced, non-autonomous complex iteration:
 
-- Base dynamics: a shift on symbols (e.g., the even/odd branch sequence).
-- Fiber dynamics: a complex map applied at each step according to the current symbol.
+\[
+(z_n,w_n)\mapsto(z_{n+1},w_{n+1}),
+\]
 
-In the simplest form, the update is
+with the gate \(C(z)\), effective base \(c_{\text{eff}}\), and exponential update defined in `MODEL.md`.
 
-- choose a branch label `s_n` (parity / rule / address symbol),
-- apply a branch map `F_{s_n}` to the state `z_n`,
-- iterate forward:  `z_{n+1} = F_{s_n}(z_n)`.
+The branch choice is not an external random process; it is induced by the evolving state via \(\Re(C(z_n))\), so the forcing is endogenous.
 
-Your system adds a **tetration / exponential** component (transcendental dynamics) and a **Collatz-like branch rule**.
+## 2. Why Direction Matters
 
-## 2. Why “one direction collapses while the other escapes”
+The anti term is:
 
-When the step map is **not invertible** (or not the inverse when you “reverse direction”), *forward vs backward* are genuinely different dynamical systems.
-Two common causes in this project:
+\[
+\phi_{\text{anti}}=\mathrm{direction}\cdot\frac{i\gamma}{2}\Delta_f,\qquad
+\Delta_f=f(\Re(C(z)))-f(\Re(C(w))).
+\]
 
-1) **Non-commutativity of compositions**  
-   Even if we only change the order/direction of applying branch maps, products of derivatives along an orbit can change:
-   the effective multiplier (Lyapunov) can be < 1 in one direction and > 1 in the other.
+In the effective base:
 
-2) **Non-holomorphic anti-term / conjugate coupling**  
-   If the update uses a conjugate term (or any non-analytic coupling),
-   reversing the “direction” can switch *destructive* phase cancellation into *constructive* reinforcement,
-   creating an escape channel.
+\[
+c_{\text{eff}}=c\exp(i\phi_{\text{total}}),
+\]
 
-This is a **direction-dependent stability transition**, which we quantify with escape rates and finite-time Lyapunov exponents.
+the anti contribution enters as:
 
-## 3. “Quasiparticles” and the official language
+\[
+\exp(i\phi_{\text{anti}})=\exp\!\left(-\mathrm{direction}\cdot\frac{\gamma}{2}\Delta_f\right),
+\]
 
-In transcendental (exponential-family) dynamics, the escaping set is organized by
+which is a real multiplicative gain/loss factor.
+So flipping `direction` flips amplification versus damping for the same mismatch \(\Delta_f\).
 
+This is the core mechanism behind forward/reverse asymmetry.
 
-## References (starter list)
+## 3. Invariant and Near-Invariant Structure
 
-See `docs/references.md`.
+If \(w=\overline z\) exactly and \(C\) preserves conjugation (it does), then:
+
+\[
+\Re(C(w))=\Re(C(z))\Rightarrow \Delta_f=0\Rightarrow \phi_{\text{anti}}=0.
+\]
+
+So on exact conjugate pairing, the anti-channel vanishes.
+Directional effects emerge when numerical or dynamical mismatch drives \(\Delta_f\neq 0\).
+
+## 4. Escape Criterion Insight
+
+Each step has:
+
+\[
+z_{n+1}=\exp(A_n),\qquad A_n=C(z_n)\Log(c_{\text{eff},n}).
+\]
+
+Since \(|\exp(a+ib)|=\exp(a)\), one-step magnitude growth is controlled by \(\Re(A_n)\).
+A practical fast-fail condition used in scripts:
+
+\[
+\Re(A_n)>\log R \;\Rightarrow\; |z_{n+1}|>R.
+\]
+
+## 5. Grounded Interpretation
+
+Use standard dynamical-systems language:
+
+- bounded region: attracting basin (Fatou-like component),
+- boundary complexity: Julia-like boundary proxy,
+- divergence channel: escaping set.
+
+Quasiparticle/fusion language may be used as an analogy layer, but the formal ground truth is the map above.
+
+## 6. Testable Claims
+
+1. There exists a parameter range where escape rate differs sharply by `direction`.
+2. Finite-time Lyapunov proxy changes sign/magnitude across that transition.
+3. The transition correlates with increased pairing mismatch statistics (\(\Delta_f\)-driven gain/loss).
+
+See `docs/02_experiments.md` for reproducible protocols.

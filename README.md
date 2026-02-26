@@ -1,22 +1,19 @@
-# Collatzscape: Forcefull tetration with direction-dependent collapse
+# Collatzscape: Forced Tetration with Direction-Dependent Collapse
 
-This repo is a **reproducible atlas** for a specific class of *symbolically forced transcendental dynamics*:
-a tetration / exponential-iteration core that is **forced by a Collatz-like branch rule**, and exhibits a **direction-dependent stability transition**:
-one direction stays in a bounded attracting region while the opposite direction develops **escape / hyper-growth** beyond a critical coupling.
+Collatzscape is a reproducible implementation of a forced complex dynamical system:
 
+- a cosine-interpolated Collatz gate \(C(z)\),
+- a phase-kicked effective base \(c_{\text{eff}}\),
+- exponential update \(z_{n+1}=\exp(C(z_n)\Log(c_{\text{eff},n}))\),
+- direction-dependent coupling that can produce asymmetric bounded/escape behavior.
 
-## What this *is* (official vocabulary)
+## Start Here
 
-- **Non-autonomous / symbolically forced complex dynamics** (a skew-product over a symbolic itinerary)
-- **Attracting basins (Fatou components)** and **Julia-set boundaries**
-
-## What this repo contributes (even if ingredients are known)
-
-Not “a new theorem”, but a **well-specified case study** + **open implementation**:
-1) a concrete Collatz-forced tetration family,  
-2) a measured **non-reciprocal (direction-dependent) stability transition** (escape rate / Lyapunov),  
-3) a basin/ray **atlas** with configs + figure regeneration scripts,  
-4) naming + glossary that makes the literature searchable.
+1. `docs/00_start_here.md`
+2. `docs/00_foundations.md`
+3. `MODEL.md`
+4. `docs/01_theory.md`
+5. `docs/02_experiments.md`
 
 ## The Model in a Nutshell
 
@@ -68,37 +65,45 @@ Whenever the orbit visits \(z\approx2\), the next step resets the magnitude to \
 python -m venv .venv
 # Windows: .venv\Scripts\activate
 source .venv/bin/activate
-
 pip install -r requirements.txt
-
-# Generate a small basin plot + one gamma sweep
-python -m collatzscape.cli demo --config configs/default.yaml
-python -m collatzscape.cli sweep --config configs/default.yaml --out figures/
 ```
 
-Optional exploratory scripts:
+Baseline runs:
 
 ```bash
-# Deterministic tanh phase kick (no jitter/noise)
+python -m collatzscape.cli demo --config configs/default.yaml --out figures/
+python -m collatzscape.cli sweep --config configs/default.yaml --out figures/
+python -m collatzscape.cli fatou --config configs/default.yaml --out figures/
+```
+
+Deterministic tanh phase-kick (no float noise):
+
+```bash
 python scripts/Collatz_tetration_quasiparticles.py --deterministic-tanh
 python scripts/falseability.py --deterministic-tanh
 ```
 
-## Repo layout
+## Applications (Explicit)
 
-- `src/collatzscape/` core model + CLI
-- `configs/` experiment configs (yaml)
-- `docs/` “paper-grade” write-up and glossary
-- `paper/` preprint-style Markdown (optional)
-- `scripts/` optional exploratory variants (`Collatz_tetration_quasiparticles.py`, `falseability.py`)
-- `figures/` output directory (generated)
-- `.github/workflows/` CI to keep it reproducible
+1. Benchmarking direction-dependent stability transitions.
+2. Reproducible basin/escape atlas generation.
+3. Numerical stress-testing for branch-sensitive transcendental maps.
+4. Deterministic vs noisy forcing comparisons.
+5. Optional exploratory analogy layer for quasiparticle/fusion interpretation.
+
+## Repo Layout
+
+- `src/collatzscape/`: core model and CLI
+- `configs/`: run configurations
+- `docs/`: foundations, theory, experiments, glossary, references
+- `scripts/`: exploratory variants
+- `paper/`: preprint-style summary
+- `figures/`: generated artifacts
 
 ## Citing
 
-If you build on this work, see `CITATION.cff`. Consider making a GitHub release and linking it to Zenodo for a DOI.
+See `CITATION.cff`. For archival citation, create a release and attach a DOI via Zenodo.
 
----
+## License
 
-### License
-MIT (see `LICENSE`).
+MIT (`LICENSE`).

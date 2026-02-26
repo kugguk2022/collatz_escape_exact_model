@@ -1,49 +1,46 @@
 # About Collatzscape
 
-Collatzescape is a reproducible research repo for a non-autonomous complex-dynamics system:
-a Collatz-like gate drives an exponential/tetration-style update, and direction-dependent coupling
-produces asymmetric stability (bounded behavior in one direction, escape in the other).
+Collatzscape is a reproducible framework for a forced complex map with direction-dependent stability.
+The model combines a Collatz-style continuous gate with exponential/tetration-like iteration.
 
-This file captures the exploratory interpretation from the shared notes linked by the project author.
+## Explicit Grounding
 
-## Fusion-Tree Interpretation (Three-Particle T-Junction)
+The project is grounded in non-autonomous/skew-product complex dynamics:
 
-In the paired model, three quasiparticle-like modes `(c1, c2, c3)` are treated with an Ising-anyon style fusion tree.
+- map iteration with endogenous forcing,
+- basin versus escape behavior,
+- finite-time stability diagnostics (escape rate and Lyapunov proxies).
 
-1. **Bottom layer (total fusion)**  
-   The full three-particle system must fuse to vacuum (`1`) to preserve total topological charge.
-   In this model, approximate pairing symmetry (`z_i ≈ conj(w_i)`) plays that role; strong pairing break
-   corresponds to escape/loss of the vacuum-fusion condition.
+Canonical equations are in `MODEL.md` and `docs/00_foundations.md`.
 
-2. **Intermediate fusion channel (logical qubit)**  
-   The pair `(c1, c2)` fuses into either:
-   - `1` (even parity, vacuum channel) -> logical `|0>`
-   - `psi` (odd parity, fermion channel) -> logical `|1>`
-   This 2D channel space is the protected logical subspace.
+## Core Formula (Short Version)
 
-3. **Top layer (braiding input)**  
-   Braiding `c1` around `c2` acts on that intermediate channel and changes the encoded logical state
-   without a direct local measurement.
+\[
+z_{n+1}=\exp\!\left(C(z_n)\Log(c_{\text{eff}}(z_n,w_n))\right),
+\]
 
-## Effective Braid Action
+with \(C(z)\) the cosine-interpolated Collatz gate and \(c_{\text{eff}}\) including paired and anti coupling.
 
-In the `{1, psi}` basis, the forward braid can be written (up to global phase) as:
+## Applications
 
-```text
-R = diag(e^{i*pi/8}, e^{i*5*pi/8})
-```
+1. Benchmarking direction-dependent transitions in forced transcendental maps.
+2. Building reproducible basin/escape atlases over parameter sweeps.
+3. Stress-testing numerical handling of branch-sensitive exponential dynamics.
+4. Rapid prototyping for deterministic versus jittered phase-kick regimes.
+5. Exploratory analogy layer (quasiparticle/fusion language) for interpretive modeling.
 
-This is the non-Abelian gate-like part of the interpretation: braiding acts on channel state, not just position.
+## Scope and Boundaries
 
-## Directional Collapse Observation
+- This is a computational dynamics model, not a claim of a new Collatz theorem.
+- Quasiparticle/fusion interpretation is optional and analogical.
+- Main claim: explicit equations + reproducible experiments + clear diagnostics.
 
-From the exploratory sweeps in the shared content:
+## Exploratory Appendix: Fusion-Tree Analogy
 
-- Forward direction retains much higher logical-channel stability.
-- Reverse direction can show a sharp collapse near a critical anti-term coupling (`gamma ~ 0.5` in that run).
-- At that critical point, intermediate-channel coherence degrades strongly (fusion outcome randomization / leakage).
+An optional interpretation maps paired states into an Ising-anyon-style fusion tree:
 
-## Scope
+- total fusion to vacuum channel (`1`) as a global consistency condition,
+- intermediate `1`/`psi` channel as a logical two-state subspace,
+- braid-like operations interpreted as channel transformations.
 
-This is an exploratory dynamical analogy built on the Collatzscape map, not a claim of physical Majorana hardware.
-Treat it as a model-layer interpretation and a guide for further simulation/testing.
+This appendix is included for exploratory context and is not required for the core dynamical results.

@@ -17,6 +17,14 @@ Base kick:
 \phi_{\text{base}}(z)=\alpha\,f(\Re(C(z))).
 \]
 
+Exploratory script variant (non-canonical, optional):
+
+\[
+\phi_{\exp}(z)=\alpha\exp(\operatorname{clip}(\Re(C(z)), -\kappa, \kappa)),
+\qquad
+\phi_{\tanh}(z)=\alpha\tanh(s\,\Re(C(z))).
+\]
+
 Paired kick:
 \[
 \phi_{\text{paired}}(z,w)=\tfrac12\big(\phi_{\text{base}}(z)+\phi_{\text{base}}(w)\big).
@@ -46,3 +54,4 @@ Implementation: `src/collatzscape/maps.py`.
 
 - If \(w_n=\overline{z_n}\) exactly, then \(\Re(C(w_n))=\Re(C(z_n))\) and \(\phi_{\text{anti}}=0\).
 - Nonzero \(\phi_{\text{anti}}\) corresponds to pairing mismatch / leakage; `direction` flips its sign.
+- Deterministic no-noise script mode sets jitter terms to zero (`dz=0`, `da=0`).
