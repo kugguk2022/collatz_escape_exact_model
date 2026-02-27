@@ -2,23 +2,6 @@
 
 Collatzscape is a reproducible implementation of a forced complex dynamical system:
 
-- a cosine-interpolated Collatz gate $$\(C(z)\)$$,
-- a phase-kicked effective base $$\(c_{\text{eff}}\)$$,
-- exponential update $$\(z_{n+1}=\exp(C(z_n)\Log(c_{\text{eff},n}))\)$$,
-- direction-dependent coupling that can produce asymmetric bounded/escape behavior.
-
-## Start Here
-
-1. `docs/00_start_here.md`
-2. `docs/00_foundations.md`
-3. `MODEL.md`
-4. `docs/01_theory.md`
-5. `docs/02_experiments.md`
-
-# Collatzscape: Forced Tetration with Direction-Dependent Collapse
-
-Collatzscape is a reproducible implementation of a forced complex dynamical system:
-
 - a cosine-interpolated Collatz gate $C(z)$,
 - a phase-kicked effective base $c_{\text{eff}}$,
 - exponential update $z_{n+1}=\exp(C(z_n)\log(c_{\text{eff},n}))$,
