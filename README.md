@@ -29,9 +29,9 @@ We study a non-autonomous iterated map in the complex plane:
    
    $$z_{n+1} = \exp\bigl(C(z_n)\,\log c_{\text{eff}}(z_n)\bigr)$$
 
-   where $c_{\text{eff}}(z_n) = c\cdot e^{i\phi_n}$ and the phase kick $\phi_n$ depends on $\Re\!\bigl(C(z_n)\bigr)$ (e.g., $\phi_n = \alpha\tanh \( $\Re\!\bigl(C(z_n)\bigr)$ $\text{scale}$).
+   where $c_{\text{eff}}(z_n) = c\cdot e^{i\phi_n}$ and the phase kick $\phi_n$ depends on $\Re\!\bigl(C(z_n)\bigr)$ (e.g., $\phi_n = \alpha\,\tanh\!\left(\Re\!\bigl(C(z_n)\bigr)/\text{scale}\right)$.).
 
-3. **State-dependent feedback** - the phase kick acts as a self-interaction that can either stabilise or destabilise the orbit, depending on the base parameter \(c\) and the kick strength \(\alpha\).
+3. **State-dependent feedback** - the phase kick acts as a self-interaction that can either stabilise or destabilise the orbit, depending on the base parameter $\(c\)$ and the kick strength $\(\alpha\).$
 
 The key discovery is a **"Collatz Bay"** – a large region in the $c$-plane where orbits remain bounded indefinitely. This stability is explained by an exact **period‑2 snap‑back cycle** $\{c^*,2\}$ with
 
