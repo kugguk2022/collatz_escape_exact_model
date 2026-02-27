@@ -29,15 +29,16 @@ We study a **non-autonomous iterated map** in the complex plane:
    
    $z_{n+1} = \exp\bigl(C(z_n)\,\log c_{\text{eff}}(z_n)\bigr)$
 
-   where $c_{\text{eff}}(z_n) = c\cdot e^{i\phi_n}$ and the phase kick $\phi_n$ depends on $\operatorname{Re}C(z_n)$ (e.g., $\phi_n = \alpha\tanh(\operatorname{Re}C(z_n)/\text{scale})$).
+ where $c_{\text{eff}}(z_n) = c\cdot e^{i\phi_n}$ and the phase kick $\phi_n$ depends on $\operatorname{Re}C(z_n)$ (e.g., $\phi_n = \alpha\tanh(\operatorname{Re}C(z_n)/\text{scale})$).
 
 3. **State‑dependent feedback** – the phase kick acts as a "self‑interaction" that can either stabilise or destabilise the orbit, depending on the base parameter $c$ and the kick strength $\alpha$.
 
-The key discovery is a **"Collatz Bay"** – a large region in the $c$-plane where orbits remain bounded indefinitely. This stability is explained by an exact **period‑2 snap‑back cycle** $\{c^*,2\}$ with
+The key discovery is a **“Collatz Bay”** – a large region in the $c$-plane where orbits remain bounded indefinitely. This stability is explained by an exact **period‑2 snap‑back cycle** $\{c^*,2\}$ with
 
 $$c^* \approx 1.9086708647584145,\qquad C(c^*) = \frac{\ln2}{\ln c^*} \approx 1.07230747.$$
 
 Whenever the orbit visits $z\approx2$, the next step resets the magnitude to $|c|$, creating a negative feedback loop.
+
 
 ### Visual Highlights
 
