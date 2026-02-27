@@ -19,25 +19,31 @@ Collatzscape is a reproducible implementation of a forced complex dynamical syst
 
 We study a non-autonomous iterated map in the complex plane:
 
-1. **Collatz gate** $C(z)$ – a smooth interpolation of the classic Collatz function:
+1. **Collatz gate** \(C(z)\) - a smooth interpolation of the classic Collatz function:
 
-   $$C(z) = \frac{z}{4}(1+\cos\pi z) + \frac{3z+1}{2}(1-\cos\pi z)$$
+   \[
+   C(z) = \frac{z}{4}(1+\cos\pi z) + \frac{3z+1}{2}(1-\cos\pi z)
+   \]
    
-   For integer $z$, this reproduces $C(2k)=k$ (the "brake") and $C(2k+1)=3(2k+1)+1$ (the "accelerator").
+   For integer \(z\), this reproduces \(C(2k)=k\) (the "brake") and \(C(2k+1)=3(2k+1)+1\) (the "accelerator").
 
-2. **Tetration core** – we iterate
+2. **Tetration core** - we iterate
    
-   $$z_{n+1} = \exp\bigl(C(z_n)\,\log c_{\text{eff}}(z_n)\bigr)$$
+   \[
+   z_{n+1} = \exp\bigl(C(z_n)\,\log c_{\mathrm{eff}}(z_n)\bigr)
+   \]
 
-   where $c_{\text{eff}}(z_n) = c\cdot e^{i\phi_n}$ and the phase kick $\phi_n$ depends on $\operatorname{Re}C(z_n)$ (e.g., $\phi_n = \alpha\tanh(\operatorname{Re}C(z_n)/\text{scale})$).
+   where \(c_{\mathrm{eff}}(z_n)=c\cdot e^{i\phi_n}\), and the phase kick \(\phi_n\) depends on \(\mathrm{Re}(C(z_n))\) (e.g., \(\phi_n=\alpha\tanh(\mathrm{Re}(C(z_n))/s)\), with scale parameter \(s\)).
 
 3. **State-dependent feedback** - the phase kick acts as a self-interaction that can either stabilise or destabilise the orbit, depending on the base parameter \(c\) and the kick strength \(\alpha\).
 
-The key discovery is a **"Collatz Bay"** – a large region in the $c$-plane where orbits remain bounded indefinitely. This stability is explained by an exact **period‑2 snap‑back cycle** $\{c^*,2\}$ with
+The key discovery is a **"Collatz Bay"** - a large region in the \(c\)-plane where orbits remain bounded indefinitely. This stability is explained by an exact **period-2 snap-back cycle** \(\{c^{\star},2\}\) with
 
-$$c^* \approx 1.9086708647584145,\qquad C(c^*) = \frac{\ln2}{\ln c^*} \approx 1.07230747.$$
+\[
+c^{\star}\approx 1.9086708647584145,\qquad C(c^{\star})=\frac{\ln 2}{\ln c^{\star}}\approx 1.07230747.
+\]
 
-Whenever the orbit visits $z\approx2$, the next step resets the magnitude to $|c|$, creating a negative feedback loop.
+Whenever the orbit visits \(z\approx 2\), the next step resets the magnitude to \(|c|\), creating a negative feedback loop.
 
 ### Visual Highlights
 
