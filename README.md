@@ -2,8 +2,8 @@
 
 Collatzscape is a reproducible implementation of a forced complex dynamical system:
 
-- a cosine-interpolated Collatz gate \(C(z)\),
-- a phase-kicked effective base \(c_{\mathrm{eff}}\),
+- a cosine-interpolated Collatz gate $\(C(z)\)$,
+- a phase-kicked effective base $\(c_{\mathrm{eff}}\)$,
 - exponential update $\(z_{n+1}=\exp(C(z_n)\log(c_{\mathrm{eff},n}))\)$,
 - direction-dependent coupling that can produce asymmetric bounded/escape behavior.
 
@@ -29,7 +29,7 @@ We study a non-autonomous iterated map in the complex plane:
    
    $$z_{n+1} = \exp\bigl(C(z_n)\,\log c_{\text{eff}}(z_n)\bigr)$$
 
-   where $c_{\text{eff}}(z_n) = c\cdot e^{i\phi_n}$ and the phase kick $\phi_n$ depends on $\Re\!\bigl(C(z_n)\bigr)$ (e.g., $\phi_n = \alpha\tanh($\Re\!\bigl(C(z_n)\bigr)/\text{scale})$).
+   where $c_{\text{eff}}(z_n) = c\cdot e^{i\phi_n}$ and the phase kick $\phi_n$ depends on $\Re\!\bigl(C(z_n)\bigr)$ (e.g., $\phi_n = \alpha\tanh($\Re\!\bigl(C(z_n)\bigr)$\text{scale}$).
 
 3. **State-dependent feedback** - the phase kick acts as a self-interaction that can either stabilise or destabilise the orbit, depending on the base parameter \(c\) and the kick strength \(\alpha\).
 
