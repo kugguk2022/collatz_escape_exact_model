@@ -51,13 +51,13 @@ Whenever the orbit visits $z\approx2$, the next step resets the magnitude to $|c
 ### What Makes This Interesting
 
 - **Continuous shadow of the Collatz conjecture** - the bay visualizes a stable region where the accelerator/brake balance is tuned.
-- **Quasiparticle interpretation** - each \(c\) behaves like a computational quasiparticle whose internal state \(z\) evolves under Collatz forcing.
-- **Topological extensions** - by enforcing conjugate pairing (\(w\approx\overline{z}\)), the system mimics Majorana-like modes and exhibits directional braiding with non-Abelian fusion rules.
+- **Quasiparticle interpretation** - each $\(c\)$ behaves like a computational quasiparticle whose internal state $\(z\)$ evolves under Collatz forcing.
+- **Topological extensions** - by enforcing conjugate pairing $(\(w\approx\overline{z}\))$, the system mimics Majorana-like modes and exhibits directional braiding with non-Abelian fusion rules.
 - **Reproducible atlas** - figures in the paper (or planned paper) can be regenerated with the provided scripts and configs.
 
 ### Open Questions / Future Directions
 
-- How does the bay change under different Collatz interpolations (for example, \(\sin^2\) instead of cosine)?
+- How does the bay change under different Collatz interpolations (for example, $\(\sin^2\)$ instead of cosine)?
 - Can the fractal dimension of the boundary be linked to known Collatz statistics (for example, average parity ratio)?
 - Does the quasiparticle spectral function reveal quantized energy levels?
 - Can the Majorana-like braiding be demonstrated with higher particle numbers?
