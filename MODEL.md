@@ -21,8 +21,10 @@ $\phi_{\text{base}}(z)=\alpha\,f(\Re(C(z)))$.
 
 Exploratory script variant (non-canonical, optional):
 
+
+
 $\[
-\phi_{\exp}(z)=\alpha\exp(\operatorname{clip}(\Re(C(z)), -\kappa, \kappa)),
+\phi_{\exp}(z)=\alpha\exp(\mathrm{clip}(\Re(C(z)), -\kappa, \kappa)),
 \qquad
 \phi_{\tanh}(z)=\alpha\tanh(s\,\Re(C(z))).
 \]$
