@@ -16,10 +16,10 @@ Canonical equations are in `MODEL.md` and `docs/00_foundations.md`.
 ## Core Formula (Short Version)
 
 \[
-z_{n+1}=\exp\!\left(C(z_n)\Log(c_{\text{eff}}(z_n,w_n))\right),
+$z_{n+1}=\exp\!\left(C(z_n)\Log(c_{\text{eff}}(z_n,w_n))\right)$,
 \]
 
-with \(C(z)\) the cosine-interpolated Collatz gate and \(c_{\text{eff}}\) including paired and anti coupling.
+with \(C(z)\) the cosine-interpolated Collatz gate and $\(c_{\text{eff}}\)$ including paired and anti coupling.
 
 ## Applications
 
