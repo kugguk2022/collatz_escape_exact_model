@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Collatzscape: Forced Tetration with Direction-Dependent Collapse
 
 Collatzscape is a reproducible implementation of a forced complex dynamical system:
@@ -114,6 +113,7 @@ See `CITATION.cff`. For archival citation, create a release and attach a DOI via
 ## License
 
 MIT (`LICENSE`).
+
 =======
 # Collatzscape: Forced Tetration with Direction-Dependent Collapse
 
