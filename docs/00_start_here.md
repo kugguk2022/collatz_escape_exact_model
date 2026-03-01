@@ -10,9 +10,11 @@ This repo now follows a single documentation spine so theory, formulas, and expe
    Compact single-source equation sheet matching `src/collatzscape/maps.py`.
 3. `docs/01_theory.md`  
    Mechanistic explanation of direction-dependent collapse/escape.
-4. `docs/02_experiments.md`  
+4. `docs/04_floquet_connection.md`  
+   Floquet-like interpretation with explicit differences and novelty boundaries.
+5. `docs/02_experiments.md`  
    Reproducible protocols, metrics, and expected outputs.
-5. `docs/03_glossary.md` and `docs/references.md`  
+6. `docs/03_glossary.md` and `docs/references.md`  
    Terminology mapping and literature anchors.
 
 ## Quick Reproduction

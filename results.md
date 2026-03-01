@@ -161,3 +161,13 @@ python scripts/dynamical_zeta/scan_and_plot.py --log-y
 
 - `fatou` outputs are expected by the CLI (`fatou_components.png`, `fatou_attractors.csv`, `fatou_basin_measure.csv`) but are not present in the current `figures/` snapshot.
 - Some legacy figures in `figures/` are present without a pinned generation command in the current scripts; they are still included above because they encode meaningful visual outcomes.
+
+## 6. Floquet Connection (Analogy vs Difference)
+
+For a disciplined Floquet-style interpretation, see:
+`docs/04_floquet_connection.md`.
+
+Short version:
+- Floquet-like analogs exist (stroboscopic map, cycle multipliers, gain/loss channel).
+- The model is not a canonical periodically driven linear Hamiltonian.
+- Main novelty here is the direction-odd anti-term channel plus the Type-2 sector-invariant feedback loop.
