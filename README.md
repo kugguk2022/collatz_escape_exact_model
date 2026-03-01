@@ -21,7 +21,7 @@ We study a non-autonomous iterated map in the complex plane:
 
 1. **Collatz gate** $C(z)$ - a smooth interpolation of the classic Collatz function:
 
-   $   C(z) = \frac{z}{4}(1+\cos\pi z) + \frac{3z+1}{2}\(1-\cos\pi z\)$
+   $C(z) = \frac{z}{4}(1+\cos\pi z) + \frac{3z+1}{2}\(1-\cos\pi z\)$
    
    For integer $z$, this reproduces $C(2k)=k$ (the "brake") and $C(2k+1)=3(2k+1)+1$ (the "accelerator").
 
@@ -224,5 +224,6 @@ See `CITATION.cff`. For archival citation, create a release and attach a DOI via
 
 MIT (`LICENSE`).
 >>>>>>> 17318795d5f68ec29c404562bd3a86b4e82b898f
+
 
 
