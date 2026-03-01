@@ -7,7 +7,7 @@ license: MIT
 authors:
   - family-names: "Farkas"
     given-names: "Zolton"
-repository-code: "https://github.com/EncapsulatorP/collatzscape"
+repository-code: "https://github.com/EncapsulatorP/collatz_quasi_particle_by_forced_tetration"
 keywords:
   - complex dynamics
   - non-autonomous iteration
