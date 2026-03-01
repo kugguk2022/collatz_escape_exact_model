@@ -156,7 +156,7 @@ def cmd_fatou(args):
     from .plot import fatou_components_plot
 
     attractors = find_attractors(
-        c=c, gamma=float(m["gamma"]), direction=int(m["direction"]), steps=int(m["steps"]),
+        c=c, alpha=float(m.get("alpha", 0.0)), gamma=float(m["gamma"]), direction=int(m["direction"]), steps=int(m["steps"]),
         re_min=g["re_min"], re_max=g["re_max"], im_min=g["im_min"], im_max=g["im_max"],
         n_samples=int(args.samples), tol=float(args.tol), seed=int(cfg.get("seed", 0)),
     )
@@ -174,7 +174,7 @@ def cmd_fatou(args):
         w.writerow(["id", "re", "im", "spectral_radius", "eig1", "eig2"])
         w.writerows(rows)
 
-    labels = fatou_label_grid(**g, attractors=attractors, c=c, gamma=float(m["gamma"]),
+    labels = fatou_label_grid(**g, attractors=attractors, c=c, alpha=float(m.get("alpha", 0.0)), gamma=float(m["gamma"]),
                               direction=int(m["direction"]), steps=int(m["steps"]))
     fatou_components_plot(labels, re_min=g["re_min"], re_max=g["re_max"], im_min=g["im_min"], im_max=g["im_max"],
                           outpath=os.path.join(out, "fatou_components.png"),

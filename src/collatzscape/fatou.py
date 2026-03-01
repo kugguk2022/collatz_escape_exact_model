@@ -35,7 +35,7 @@ def local_stability(z_star: complex, *, c: complex, gamma: float, direction: int
     rho = float(np.max(np.abs(eig)))
     return {"eig1": complex(eig[0]), "eig2": complex(eig[1]), "spectral_radius": rho}
 
-def find_attractors(*, c: complex, gamma: float, direction: int, steps: int,
+def find_attractors(*, c: complex, alpha: float, gamma: float, direction: int, steps: int,
                     re_min: float, re_max: float, im_min: float, im_max: float,
                     n_samples: int = 5000, tol: float = 1e-3, seed: int = 0) -> list[complex]:
     """
@@ -51,7 +51,7 @@ def find_attractors(*, c: complex, gamma: float, direction: int, steps: int,
     reps = {}
     for x, y in zip(xs, ys):
         z0 = complex(float(x), float(y))
-        zf, esc, _ = iterate(z0, c=c, gamma=gamma, direction=direction, steps=steps)
+        zf, esc, _ = iterate(z0, c=c, alpha=alpha, gamma=gamma, direction=direction, steps=steps)
         if esc:
             continue
         key = (round(np.real(zf)/tol)*tol, round(np.imag(zf)/tol)*tol)
@@ -62,14 +62,22 @@ def find_attractors(*, c: complex, gamma: float, direction: int, steps: int,
     items = sorted(reps.items(), key=lambda kv: kv[1], reverse=True)
     return [complex(k[0], k[1]) for k, _ in items]
 
-def classify_point(z0: complex, attractors: list[complex], *, c: complex, gamma: float, direction: int,
+def classify_point(z0: complex, attractors: list[complex], *, c: complex, alpha: float, gamma: float, direction: int,
                    steps: int, escape_radius: float = 1e6) -> int:
     """
     Returns:
       -1 if escaped
       i (0..len(attractors)-1) for nearest attractor representative by endpoint.
     """
-    zf, esc, _ = iterate(z0, c=c, gamma=gamma, direction=direction, steps=steps, escape_radius=escape_radius)
+    zf, esc, _ = iterate(
+        z0,
+        c=c,
+        alpha=alpha,
+        gamma=gamma,
+        direction=direction,
+        steps=steps,
+        escape_radius=escape_radius,
+    )
     if esc or len(attractors) == 0:
         return -1
     d = [abs(zf - a) for a in attractors]
@@ -77,7 +85,7 @@ def classify_point(z0: complex, attractors: list[complex], *, c: complex, gamma:
 
 def fatou_label_grid(*, re_min: float, re_max: float, im_min: float, im_max: float,
                      n_re: int, n_im: int, attractors: list[complex],
-                     c: complex, gamma: float, direction: int, steps: int,
+                     c: complex, alpha: float, gamma: float, direction: int, steps: int,
                      escape_radius: float = 1e6) -> np.ndarray:
     """
     Grid labels:
@@ -90,7 +98,7 @@ def fatou_label_grid(*, re_min: float, re_max: float, im_min: float, im_max: flo
     for j, y in enumerate(ys):
         for i, x in enumerate(xs):
             z0 = complex(float(x), float(y))
-            lab[j, i] = classify_point(z0, attractors, c=c, gamma=gamma, direction=direction,
+            lab[j, i] = classify_point(z0, attractors, c=c, alpha=alpha, gamma=gamma, direction=direction,
                                        steps=steps, escape_radius=escape_radius)
     return lab
 

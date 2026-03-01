@@ -45,3 +45,21 @@ def basin_labels_plot(labels, *, re_min, re_max, im_min, im_max, outpath=None, t
     else:
         plt.show()
     plt.close()
+
+
+def fatou_components_plot(labels, *, re_min, re_max, im_min, im_max, outpath=None,
+                          title="Fatou components (proxy)"):
+    """
+    Plot integer basin labels from fatou_label_grid:
+      -1 = escaped
+       0..K-1 = attractor basin ids.
+    """
+    basin_labels_plot(
+        labels,
+        re_min=re_min,
+        re_max=re_max,
+        im_min=im_min,
+        im_max=im_max,
+        outpath=outpath,
+        title=title,
+    )
