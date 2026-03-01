@@ -10,11 +10,19 @@ Escape rate over \(M\) seeds:
 
 where \(\tau_j\) is first escape time (or \(+\infty\) if no escape by \(N\)).
 
-Finite-time Lyapunov proxy:
+Finite-time Lyapunov proxy (rough):
 
 \[
 \lambda_N\approx\frac{1}{N}\sum_{k=0}^{N-1}\log\frac{\|\delta z_{k+1}\|}{\|\delta z_k\|}.
 \]
+
+Maximal Lyapunov exponent (accurate, Benettin-style):
+
+\[
+\lambda_{\max}\approx \frac{1}{N}\sum_{k=0}^{N-1}\log\frac{\|\delta \mathbf{x}_{k+1}\|}{\varepsilon},
+\]
+
+with stepwise perturbation renormalization \(\|\delta \mathbf{x}_k\|=\varepsilon\), optional warmup, and trial averaging.
 
 For survival-map scripts:
 
@@ -50,6 +58,8 @@ python -m collatzscape.cli fatou --config configs/default.yaml --out figures/
 - `figures/sweep_escape_rate_dir-1.png`
 - `figures/sweep_lyapunov_dir1.png`
 - `figures/sweep_lyapunov_dir-1.png`
+- `figures/sweep_lyapunov_compare_dir1.png`
+- `figures/sweep_lyapunov_compare_dir-1.png`
 - `figures/fatou_components.png`
 - `figures/fatou_attractors.csv`
 - `figures/fatou_basin_measure.csv`

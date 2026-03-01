@@ -5,7 +5,7 @@ import yaml
 import matplotlib.pyplot as plt
 
 from .plot import basin_plot
-from .metrics import escape_rate, finite_time_lyapunov
+from .metrics import escape_rate, finite_time_lyapunov_rough, maximal_lyapunov_stats
 
 def _load_config(path: str) -> dict:
     with open(path, "r", encoding="utf-8") as f:
@@ -41,33 +41,80 @@ def cmd_sweep(args):
            + 1j*rng.uniform(g["im_min"], g["im_max"], size=2000))
 
     rows = []
-    for direction in s["directions"]:
-        for gamma in s["gammas"]:
+    base_seed = int(cfg.get("seed", 0))
+    ly_warmup = int(m.get("lyapunov_warmup_steps", 32))
+    ly_rough_warmup = int(m.get("lyapunov_rough_warmup_steps", 0))
+    ly_trials = int(m.get("lyapunov_trials", 8))
+    ly_eps = float(m.get("lyapunov_eps", 1e-8))
+    start_z = complex(float(m.get("lyapunov_z0_re", 1.0)), float(m.get("lyapunov_z0_im", 0.0)))
+
+    for dir_idx, direction in enumerate(s["directions"]):
+        for gamma_idx, gamma in enumerate(s["gammas"]):
             er = escape_rate(
                 pts, c=c, alpha=float(m.get("alpha", 0.0)), gamma=float(gamma), direction=int(direction), steps=steps,
                 kick_mode=str(m.get("kick_mode", "tanh")), C_mode=str(m.get("C_mode", "cosine")),
                 paired=bool(m.get("paired", True))
             )
-            ly = finite_time_lyapunov(
-                complex(0.1, 0.1), c=c, alpha=float(m.get("alpha", 0.0)), gamma=float(gamma), direction=int(direction), steps=steps,
+
+            ly_rough = finite_time_lyapunov_rough(
+                start_z, c=c, alpha=float(m.get("alpha", 0.0)), gamma=float(gamma), direction=int(direction), steps=steps,
                 kick_mode=str(m.get("kick_mode", "tanh")), C_mode=str(m.get("C_mode", "cosine")),
-                paired=bool(m.get("paired", True))
+                paired=bool(m.get("paired", True)), eps=ly_eps, warmup_steps=ly_rough_warmup,
+                seed=base_seed + 20000 + 1000 * dir_idx + gamma_idx,
             )
-            rows.append((float(gamma), int(direction), float(er), float(ly)))
+
+            mle_stats = maximal_lyapunov_stats(
+                start_z,
+                c=c,
+                alpha=float(m.get("alpha", 0.0)),
+                gamma=float(gamma),
+                direction=int(direction),
+                steps=steps,
+                kick_mode=str(m.get("kick_mode", "tanh")),
+                C_mode=str(m.get("C_mode", "cosine")),
+                paired=bool(m.get("paired", True)),
+                eps=ly_eps,
+                warmup_steps=ly_warmup,
+                n_trials=ly_trials,
+                seed=base_seed + 1000 * dir_idx + gamma_idx,
+            )
+            rows.append(
+                (
+                    float(gamma),
+                    int(direction),
+                    float(er),
+                    float(ly_rough),
+                    float(mle_stats["mle"]),
+                    float(mle_stats["mle_std"]),
+                    int(mle_stats["valid_trials"]),
+                )
+            )
 
     import csv
     csv_path = os.path.join(out, "sweep_metrics.csv")
     with open(csv_path, "w", newline="", encoding="utf-8") as f:
         w = csv.writer(f)
-        w.writerow(["gamma", "direction", "escape_rate", "ft_lyapunov"])
+        w.writerow(
+            [
+                "gamma",
+                "direction",
+                "escape_rate",
+                "ft_lyapunov_rough",
+                "mle",
+                "mle_std",
+                "mle_valid_trials",
+            ]
+        )
         w.writerows(rows)
 
     # plots
-    gammas = sorted(set(r[0] for r in rows))
     for direction in sorted(set(r[1] for r in rows)):
-        xs = [r[0] for r in rows if r[1]==direction]
-        ers = [r[2] for r in rows if r[1]==direction]
-        lys = [r[3] for r in rows if r[1]==direction]
+        dir_rows = sorted((r for r in rows if r[1] == direction), key=lambda x: x[0])
+        xs = [r[0] for r in dir_rows]
+        ers = [r[2] for r in dir_rows]
+        ly_rough = [r[3] for r in dir_rows]
+        ly_mle = [r[4] for r in dir_rows]
+        ly_mle_std = [r[5] for r in dir_rows]
 
         plt.figure()
         plt.plot(xs, ers, marker="o")
@@ -78,11 +125,21 @@ def cmd_sweep(args):
         plt.close()
 
         plt.figure()
-        plt.plot(xs, lys, marker="o")
+        plt.errorbar(xs, ly_mle, yerr=ly_mle_std, marker="o", capsize=3)
         plt.xlabel("gamma")
-        plt.ylabel("finite_time_lyapunov (rough)")
-        plt.title(f"FT Lyapunov vs gamma (direction={direction})")
+        plt.ylabel("MLE (Benettin, mean +/- std)")
+        plt.title(f"Maximal Lyapunov vs gamma (direction={direction})")
         plt.savefig(os.path.join(out, f"sweep_lyapunov_dir{direction}.png"), dpi=200, bbox_inches="tight")
+        plt.close()
+
+        plt.figure()
+        plt.plot(xs, ly_rough, marker="o", label="rough (single direction)")
+        plt.errorbar(xs, ly_mle, yerr=ly_mle_std, marker="o", capsize=3, label="accurate MLE")
+        plt.xlabel("gamma")
+        plt.ylabel("Lyapunov exponent (per step)")
+        plt.title(f"Lyapunov estimator comparison (direction={direction})")
+        plt.legend()
+        plt.savefig(os.path.join(out, f"sweep_lyapunov_compare_dir{direction}.png"), dpi=200, bbox_inches="tight")
         plt.close()
 
 

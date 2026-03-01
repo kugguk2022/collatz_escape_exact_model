@@ -18,6 +18,12 @@ model:
   kick_mode: tanh
   C_mode: cosine
   paired: true
+  lyapunov_eps: 1.0e-8
+  lyapunov_trials: 8
+  lyapunov_warmup_steps: 32
+  lyapunov_rough_warmup_steps: 0
+  lyapunov_z0_re: 1.0
+  lyapunov_z0_im: 0.0
 
 sweep:
   gammas: [0.0, 0.05, 0.10, 0.15, 0.30, 0.50]
